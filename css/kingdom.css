@@ -97,7 +97,6 @@ body {
     z-index: 20;
 
     user-select: none;
-
     cursor: pointer;
 
     transition: transform .2s;
@@ -127,27 +126,38 @@ body {
 ========================= */
 
 #castle {
-    #castle {
     position: absolute;
     z-index: 50;
 
     font-size: 100px;
+
     text-align: center;
 
     user-select: none;
 
-    filter: drop-shadow(3px 5px 2px rgba(0,0,0,.4));
+    filter:
+        drop-shadow(
+            3px 5px 2px
+            rgba(0,0,0,.4)
+        );
 }
 
 .building-level {
     font-size: 14px;
+
     background: #21170f;
+
     color: white;
+
     border: 2px solid #d49a45;
+
     border-radius: 6px;
+
     padding: 4px 8px;
+
     margin-top: -5px;
 }
+
 
 /* =========================
    JOUEUR
@@ -155,12 +165,14 @@ body {
 
 #player {
     position: absolute;
+
     z-index: 100;
 
     width: 55px;
     height: 55px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -182,6 +194,7 @@ body {
 
 .built-building {
     position: absolute;
+
     z-index: 30;
 
     font-size: 60px;
@@ -196,10 +209,12 @@ body {
             rgba(0,0,0,.4)
         );
 
-    animation: buildingAppear .4s ease;
+    animation:
+        buildingAppear .4s ease;
 }
 
 @keyframes buildingAppear {
+
     from {
         transform: scale(0);
         opacity: 0;
@@ -218,6 +233,7 @@ body {
 
 .enemy {
     position: absolute;
+
     z-index: 40;
 
     font-size: 60px;
@@ -247,6 +263,7 @@ body {
     background: #351010;
 
     border: 1px solid #111;
+
     border-radius: 5px;
 
     overflow: hidden;
@@ -295,6 +312,7 @@ body {
 
 .controls {
     position: fixed;
+
     z-index: 9000;
 
     bottom: 0;
@@ -304,25 +322,30 @@ body {
     height: 70px;
 
     display: flex;
+
     justify-content: center;
     align-items: center;
 
     gap: 15px;
 
     background: #21170f;
+
     border-top: 4px solid #8b5a2b;
 }
 
 .controls button {
     position: relative;
+
     z-index: 9001;
 
     padding: 12px 20px;
 
     border: 2px solid #b87932;
+
     border-radius: 8px;
 
     background: #5b3519;
+
     color: white;
 
     font-weight: bold;
@@ -332,6 +355,7 @@ body {
 
 .controls button:hover {
     transform: translateY(-3px);
+
     background: #75471f;
 }
 
@@ -342,6 +366,7 @@ body {
 
 .panel {
     position: fixed;
+
     z-index: 10000;
 
     top: 50%;
@@ -358,6 +383,7 @@ body {
     background: #21170f;
 
     border: 3px solid #b87932;
+
     border-radius: 15px;
 
     color: white;
@@ -393,6 +419,7 @@ body {
     padding: 12px;
 
     border: 2px solid #9b642c;
+
     border-radius: 8px;
 
     background: #5b3519;
@@ -421,6 +448,7 @@ body {
 
 #message {
     position: fixed;
+
     z-index: 11000;
 
     left: 50%;
@@ -457,11 +485,12 @@ body {
 
 
 /* =========================
-   AIDE
+   AIDE COMBAT
 ========================= */
 
 #combatHelp {
     position: fixed;
+
     z-index: 4000;
 
     right: 15px;
@@ -472,6 +501,7 @@ body {
     background: #21170f;
 
     border: 2px solid #b87932;
+
     border-radius: 10px;
 
     color: white;
