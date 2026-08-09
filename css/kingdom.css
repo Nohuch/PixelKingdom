@@ -200,3 +200,195 @@ body {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
 }
+/* =========================
+   BÂTIMENTS
+========================= */
+
+.built-building {
+
+    position: absolute;
+
+    z-index: 20;
+
+    font-size: 60px;
+
+    cursor: pointer;
+
+    filter:
+        drop-shadow(
+            3px 5px 2px
+            rgba(0,0,0,.4)
+        );
+
+    animation:
+        buildingAppear .4s ease;
+
+}
+
+
+@keyframes buildingAppear {
+
+    from {
+
+        transform: scale(0);
+
+        opacity: 0;
+
+    }
+
+    to {
+
+        transform: scale(1);
+
+        opacity: 1;
+
+    }
+
+}
+
+
+/* =========================
+   NIVEAU CHÂTEAU
+========================= */
+
+#castle {
+
+    position: absolute;
+
+    z-index: 20;
+
+    text-align: center;
+
+}
+
+
+.building-level {
+
+    font-size: 14px;
+
+    background: #21170f;
+
+    color: white;
+
+    border: 2px solid #d49a45;
+
+    border-radius: 6px;
+
+    padding: 4px 8px;
+
+    margin-top: -5px;
+
+}
+
+
+/* =========================
+   MENU CONSTRUCTION
+========================= */
+
+.panel {
+
+    position: fixed;
+
+    z-index: 300;
+
+    top: 50%;
+
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(.8);
+
+    width: 360px;
+
+    padding: 25px;
+
+    background: #21170f;
+
+    border: 3px solid #b87932;
+
+    border-radius: 15px;
+
+    color: white;
+
+    text-align: center;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: .25s;
+
+    box-shadow:
+        0 10px 40px
+        rgba(0,0,0,.7);
+
+}
+
+
+.panel.open {
+
+    opacity: 1;
+
+    pointer-events: auto;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1);
+
+}
+
+
+.panel h2 {
+
+    margin-bottom: 15px;
+
+}
+
+
+.panel p {
+
+    font-size: 16px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.panel button {
+
+    width: 100%;
+
+    margin: 6px 0;
+
+    padding: 12px;
+
+    border: 2px solid #9b642c;
+
+    border-radius: 8px;
+
+    background: #5b3519;
+
+    color: white;
+
+    cursor: pointer;
+
+}
+
+
+.panel button:hover {
+
+    background: #7a4921;
+
+}
+
+
+.panel small {
+
+    display: block;
+
+    margin-top: 4px;
+
+    opacity: .7;
+
+}
