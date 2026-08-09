@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+<meta charset="UTF-8">
+
+<title>Mon Royaume</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🏰 Mon Royaume</h1>
+
+<p>Bienvenue Roi !</p>
+
+<h2>💰 Or : <span id="gold">500</span></h2>
+
+<h2>🌲 Bois : <span id="wood">250</span></h2>
+
+<h2>🪨 Pierre : <span id="stone">150</span></h2>
+
+<button onclick="collectGold()">Récolter 100 Or</button>
+
+</header>
+
+<script>
+
+let gold=500;
+
+function collectGold(){
+
+gold+=100;
+
+document.getElementById("gold").innerHTML=gold;
+
+}
+
+</script>
+
+</body>
+</html>
