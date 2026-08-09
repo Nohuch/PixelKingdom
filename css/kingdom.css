@@ -127,35 +127,27 @@ body {
 ========================= */
 
 #castle {
+    #castle {
     position: absolute;
-    z-index: 20;
+    z-index: 50;
 
     font-size: 100px;
     text-align: center;
 
     user-select: none;
 
-    filter:
-        drop-shadow(
-            3px 5px 2px
-            rgba(0,0,0,.4)
-        );
+    filter: drop-shadow(3px 5px 2px rgba(0,0,0,.4));
 }
 
 .building-level {
     font-size: 14px;
-
     background: #21170f;
     color: white;
-
     border: 2px solid #d49a45;
     border-radius: 6px;
-
     padding: 4px 8px;
-
     margin-top: -5px;
 }
-
 
 /* =========================
    JOUEUR
