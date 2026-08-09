@@ -4,56 +4,36 @@
 // =========================
 
 
-// =========================
 // JOUEUR
-// =========================
 
 let player = {
-
     x: 600,
-
     y: 400,
-
     speed: 6
-
 };
 
 
-// =========================
 // RESSOURCES
-// =========================
 
 let resources = {
-
     gold: 200,
-
     wood: 450,
-
     stone: 40,
-
     food: 300,
-
     gems: 5
-
 };
 
 
-// =========================
 // JEU
-// =========================
 
 let buildings = [];
-
 let castleLevel = 1;
 
 let playerLevel = 1;
-
 let playerXP = 0;
 
 
-// =========================
 // ÉLÉMENTS
-// =========================
 
 const playerElement =
     document.getElementById("player");
@@ -63,110 +43,73 @@ const world =
 
 
 // =========================
-// DÉMARRAGE
-// =========================
-
-loadGame();
-
-updatePlayer();
-
-updateResources();
-
-updateXP();
-
-setupResources();
-
-
-// =========================
 // DÉPLACEMENT
 // =========================
 
-document.addEventListener(
-    "keydown",
-    function(event) {
+document.addEventListener("keydown", function(event) {
 
-        const key =
-            event.key.toLowerCase();
+    const key = event.key.toLowerCase();
 
-
-        if (
-            key === "z" ||
-            key === "arrowup"
-        ) {
-
-            player.y -= player.speed;
-
-        }
-
-
-        if (
-            key === "s" ||
-            key === "arrowdown"
-        ) {
-
-            player.y += player.speed;
-
-        }
-
-
-        if (
-            key === "q" ||
-            key === "arrowleft"
-        ) {
-
-            player.x -= player.speed;
-
-        }
-
-
-        if (
-            key === "d" ||
-            key === "arrowright"
-        ) {
-
-            player.x += player.speed;
-
-        }
-
-
-        // Limites de la carte
-
-        const maxX =
-            world.clientWidth - 60;
-
-        const maxY =
-            world.clientHeight - 80;
-
-
-        player.x =
-            Math.max(
-                10,
-                Math.min(
-                    player.x,
-                    maxX
-                )
-            );
-
-
-        player.y =
-            Math.max(
-                70,
-                Math.min(
-                    player.y,
-                    maxY
-                )
-            );
-
-
-        updatePlayer();
-
+    // Empêche le navigateur de faire n'importe quoi
+    if (
+        key === "arrowup" ||
+        key === "arrowdown" ||
+        key === "arrowleft" ||
+        key === "arrowright"
+    ) {
+        event.preventDefault();
     }
-);
 
 
-// =========================
-// POSITION JOUEUR
-// =========================
+    if (key === "z" || key === "arrowup") {
+        player.y -= player.speed;
+    }
+
+    if (key === "s" || key === "arrowdown") {
+        player.y += player.speed;
+    }
+
+    if (key === "q" || key === "arrowleft") {
+        player.x -= player.speed;
+    }
+
+    if (key === "d" || key === "arrowright") {
+        player.x += player.speed;
+    }
+
+
+    // ATTAQUE
+
+    if (key === "e") {
+        attack();
+    }
+
+
+    // Limites
+
+    const maxX =
+        world.clientWidth - 60;
+
+    const maxY =
+        world.clientHeight - 80;
+
+
+    player.x = Math.max(
+        10,
+        Math.min(player.x, maxX)
+    );
+
+
+    player.y = Math.max(
+        10,
+        Math.min(player.y, maxY)
+    );
+
+
+    updatePlayer();
+
+});
+
 
 function updatePlayer() {
 
@@ -185,28 +128,19 @@ function updatePlayer() {
 
 function updateResources() {
 
-    document.getElementById("gold")
-        .textContent =
+    document.getElementById("gold").textContent =
         resources.gold;
 
-
-    document.getElementById("wood")
-        .textContent =
+    document.getElementById("wood").textContent =
         resources.wood;
 
-
-    document.getElementById("stone")
-        .textContent =
+    document.getElementById("stone").textContent =
         resources.stone;
 
-
-    document.getElementById("food")
-        .textContent =
+    document.getElementById("food").textContent =
         resources.food;
 
-
-    document.getElementById("gems")
-        .textContent =
+    document.getElementById("gems").textContent =
         resources.gems;
 
 }
@@ -218,14 +152,8 @@ function updateResources() {
 
 function setupResources() {
 
-    const resourceElements =
-        document.querySelectorAll(
-            ".resource"
-        );
-
-
-    resourceElements.forEach(
-        function(resource) {
+    document.querySelectorAll(".resource")
+        .forEach(function(resource) {
 
             resource.addEventListener(
                 "click",
@@ -235,29 +163,23 @@ function setupResources() {
                         resource.dataset.type;
 
 
-                    if (
-                        type === "wood"
-                    ) {
+                    if (type === "wood") {
 
                         resources.wood += 25;
 
                         showMessage(
                             "🌲 +25 bois !"
                         );
-
                     }
 
 
-                    if (
-                        type === "stone"
-                    ) {
+                    if (type === "stone") {
 
                         resources.stone += 20;
 
                         showMessage(
                             "🪨 +20 pierre !"
                         );
-
                     }
 
 
@@ -265,31 +187,26 @@ function setupResources() {
                         "scale(0)";
 
 
-                    setTimeout(
-                        function() {
+                    setTimeout(function() {
 
-                            resource.remove();
+                        resource.remove();
 
-                        },
-                        250
-                    );
+                    }, 250);
 
 
                     updateResources();
-
                     saveGame();
 
                 }
             );
 
-        }
-    );
+        });
 
 }
 
 
 // =========================
-// MENU CONSTRUCTION
+// CONSTRUCTION
 // =========================
 
 function openBuildMenu() {
@@ -310,151 +227,100 @@ function closeBuildMenu() {
 }
 
 
-// =========================
-// CONSTRUIRE
-// =========================
-
 function build(type) {
 
     let goldCost = 0;
-
     let woodCost = 0;
-
     let stoneCost = 0;
 
     let emoji = "";
 
 
-    if (
-        type === "house"
-    ) {
+    if (type === "house") {
 
         goldCost = 100;
-
         woodCost = 50;
 
         emoji = "🏠";
-
     }
 
 
-    if (
-        type === "farm"
-    ) {
+    if (type === "farm") {
 
         goldCost = 150;
-
         woodCost = 80;
 
         emoji = "🌾";
-
     }
 
 
-    if (
-        type === "mine"
-    ) {
+    if (type === "mine") {
 
         goldCost = 200;
-
         stoneCost = 100;
 
         emoji = "⛏️";
-
     }
 
 
-    // Vérification or
-
-    if (
-        resources.gold <
-        goldCost
-    ) {
+    if (resources.gold < goldCost) {
 
         showMessage(
             "❌ Pas assez d'or !"
         );
 
         return;
-
     }
 
 
-    // Vérification bois
-
-    if (
-        resources.wood <
-        woodCost
-    ) {
+    if (resources.wood < woodCost) {
 
         showMessage(
             "❌ Pas assez de bois !"
         );
 
         return;
-
     }
 
 
-    // Vérification pierre
-
-    if (
-        resources.stone <
-        stoneCost
-    ) {
+    if (resources.stone < stoneCost) {
 
         showMessage(
             "❌ Pas assez de pierre !"
         );
 
         return;
-
     }
 
 
-    // Paiement
+    resources.gold -= goldCost;
+    resources.wood -= woodCost;
+    resources.stone -= stoneCost;
 
-    resources.gold -=
-        goldCost;
-
-    resources.wood -=
-        woodCost;
-
-    resources.stone -=
-        stoneCost;
-
-
-    // Création bâtiment
 
     const building =
-        document.createElement(
-            "div"
-        );
+        document.createElement("div");
 
 
     building.className =
         "built-building";
 
-
     building.textContent =
         emoji;
 
 
-    building.style.left =
-        (
-            250 +
-            buildings.length *
-            100
-        ) + "px";
+    const position =
+        250 + buildings.length * 100;
 
+
+    building.style.left =
+        position + "px";
 
     building.style.top =
         "350px";
 
 
-    world.appendChild(
-        building
-    );
+    world.appendChild(building);
 
 
     buildings.push({
@@ -482,88 +348,67 @@ function build(type) {
 
 
 // =========================
-// PRODUCTION
+// BOUTONS
 // =========================
 
-setInterval(
-    function() {
-
-        let gold = 0;
-
-        let food = 0;
-
-        let stone = 0;
+document
+    .getElementById("buildButton")
+    .addEventListener(
+        "click",
+        openBuildMenu
+    );
 
 
-        buildings.forEach(
-            function(building) {
-
-                if (
-                    building.type ===
-                    "house"
-                ) {
-
-                    gold += 10;
-
-                }
+document
+    .getElementById("closeBuildButton")
+    .addEventListener(
+        "click",
+        closeBuildMenu
+    );
 
 
-                if (
-                    building.type ===
-                    "farm"
-                ) {
+document
+    .querySelectorAll(
+        "[data-building]"
+    )
+    .forEach(function(button) {
 
-                    food += 15;
+        button.addEventListener(
+            "click",
+            function() {
 
-                }
-
-
-                if (
-                    building.type ===
-                    "mine"
-                ) {
-
-                    stone += 10;
-
-                }
+                build(
+                    button.dataset.building
+                );
 
             }
         );
 
-
-        resources.gold +=
-            gold;
-
-        resources.food +=
-            food;
-
-        resources.stone +=
-            stone;
+    });
 
 
-        if (
-            gold > 0 ||
-            food > 0 ||
-            stone > 0
-        ) {
+document
+    .getElementById("saveButton")
+    .addEventListener(
+        "click",
+        function() {
+
+            saveGame();
 
             showMessage(
-                "🏭 Production : "
-                + "+" + gold + " 🪙 "
-                + "+" + food + " 🌾 "
-                + "+" + stone + " 🪨"
+                "💾 Partie sauvegardée !"
             );
 
         }
+    );
 
 
-        updateResources();
-
-        saveGame();
-
-    },
-    5000
-);
+document
+    .getElementById("upgradeButton")
+    .addEventListener(
+        "click",
+        upgradeCastle
+    );
 
 
 // =========================
@@ -579,50 +424,41 @@ function upgradeCastle() {
         castleLevel * 150;
 
 
-    if (
-        resources.gold <
-        goldCost
-    ) {
+    if (resources.gold < goldCost) {
 
         showMessage(
             "❌ Pas assez d'or !"
         );
 
         return;
-
     }
 
 
-    if (
-        resources.stone <
-        stoneCost
-    ) {
+    if (resources.stone < stoneCost) {
 
         showMessage(
             "❌ Pas assez de pierre !"
         );
 
         return;
-
     }
 
 
-    resources.gold -=
-        goldCost;
-
-    resources.stone -=
-        stoneCost;
-
+    resources.gold -= goldCost;
+    resources.stone -= stoneCost;
 
     castleLevel++;
 
 
     document
-        .getElementById(
-            "castleLevel"
-        )
+        .getElementById("castleLevel")
         .textContent =
         castleLevel;
+
+
+    updateResources();
+
+    saveGame();
 
 
     showMessage(
@@ -631,114 +467,120 @@ function upgradeCastle() {
         + " !"
     );
 
+}
+
+
+// =========================
+// PRODUCTION
+// =========================
+
+setInterval(function() {
+
+    let gold = 0;
+    let food = 0;
+    let stone = 0;
+
+
+    buildings.forEach(function(building) {
+
+        if (building.type === "house") {
+            gold += 10;
+        }
+
+        if (building.type === "farm") {
+            food += 15;
+        }
+
+        if (building.type === "mine") {
+            stone += 10;
+        }
+
+    });
+
+
+    resources.gold += gold;
+    resources.food += food;
+    resources.stone += stone;
+
+
+    if (
+        gold > 0 ||
+        food > 0 ||
+        stone > 0
+    ) {
+
+        showMessage(
+            "🏭 +"
+            + gold + " 🪙  +"
+            + food + " 🌾  +"
+            + stone + " 🪨"
+        );
+
+    }
+
 
     updateResources();
 
     saveGame();
 
-}
+}, 5000);
 
 
 // =========================
 // COMBAT
 // =========================
 
-document.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (
-            event.key.toLowerCase()
-            === "e"
-        ) {
-
-            attack();
-
-        }
-
-    }
-);
-
-
-// =========================
-// ATTAQUE
-// =========================
-
 function attack() {
 
     const enemies =
-        document.querySelectorAll(
-            ".enemy"
-        );
+        document.querySelectorAll(".enemy");
 
 
-    let attacked = false;
+    let enemyFound = false;
 
 
-    enemies.forEach(
-        function(enemy) {
+    enemies.forEach(function(enemy) {
 
-            const playerX =
-                player.x;
+        const enemyX =
+            parseInt(enemy.style.left);
 
-            const playerY =
-                player.y;
-
-
-            const enemyX =
-                parseInt(
-                    enemy.style.left
-                );
+        const enemyY =
+            parseInt(enemy.style.top);
 
 
-            const enemyY =
-                parseInt(
-                    enemy.style.top
-                );
+        const distance =
+            Math.sqrt(
+
+                Math.pow(
+                    player.x - enemyX,
+                    2
+                )
+
+                +
+
+                Math.pow(
+                    player.y - enemyY,
+                    2
+                )
+
+            );
 
 
-            const distance =
-                Math.sqrt(
+        if (distance < 130) {
 
-                    Math.pow(
-                        playerX -
-                        enemyX,
-                        2
-                    )
+            enemyFound = true;
 
-                    +
-
-                    Math.pow(
-                        playerY -
-                        enemyY,
-                        2
-                    )
-
-                );
-
-
-            // Distance d'attaque
-
-            if (
-                distance < 130
-            ) {
-
-                damageEnemy(
-                    enemy
-                );
-
-                attacked = true;
-
-            }
+            damageEnemy(enemy);
 
         }
-    );
+
+    });
 
 
-    if (!attacked) {
+    if (!enemyFound) {
 
         showMessage(
-            "⚔️ Aucun ennemi à proximité !"
+            "⚔️ Aucun ennemi assez proche !"
         );
 
     }
@@ -746,16 +588,10 @@ function attack() {
 }
 
 
-// =========================
-// DÉGÂTS
-// =========================
-
 function damageEnemy(enemy) {
 
     let hp =
-        Number(
-            enemy.dataset.hp
-        );
+        Number(enemy.dataset.hp);
 
 
     hp -= 25;
@@ -766,9 +602,7 @@ function damageEnemy(enemy) {
 
 
     const maxHP =
-        Number(
-            enemy.dataset.maxhp
-        );
+        Number(enemy.dataset.maxhp);
 
 
     const bar =
@@ -780,46 +614,32 @@ function damageEnemy(enemy) {
     if (bar) {
 
         bar.style.width =
-            (
-                hp /
-                maxHP *
-                100
+            Math.max(
+                0,
+                (hp / maxHP) * 100
             ) + "%";
 
     }
 
 
-    enemy.classList.add(
-        "hit"
-    );
+    enemy.classList.add("hit");
 
 
-    setTimeout(
-        function() {
+    setTimeout(function() {
 
-            enemy.classList.remove(
-                "hit"
-            );
+        enemy.classList.remove("hit");
 
-        },
-        200
-    );
+    }, 200);
 
 
     if (hp <= 0) {
 
-        killEnemy(
-            enemy
-        );
+        killEnemy(enemy);
 
     }
 
 }
 
-
-// =========================
-// TUER MONSTRE
-// =========================
 
 function killEnemy(enemy) {
 
@@ -835,9 +655,7 @@ function killEnemy(enemy) {
 
     checkLevel();
 
-
     updateResources();
-
     updateXP();
 
     saveGame();
@@ -847,14 +665,11 @@ function killEnemy(enemy) {
         "scale(0)";
 
 
-    setTimeout(
-        function() {
+    setTimeout(function() {
 
-            enemy.remove();
+        enemy.remove();
 
-        },
-        300
-    );
+    }, 300);
 
 }
 
@@ -865,36 +680,24 @@ function killEnemy(enemy) {
 
 function updateXP() {
 
-    document
-        .getElementById("xp")
-        .textContent =
+    document.getElementById("xp").textContent =
         playerXP;
 
-
-    document
-        .getElementById("level")
-        .textContent =
+    document.getElementById("level").textContent =
         playerLevel;
 
 }
 
 
-// =========================
-// NIVEAU
-// =========================
-
 function checkLevel() {
 
-    const needed =
+    const requiredXP =
         playerLevel * 100;
 
 
-    if (
-        playerXP >= needed
-    ) {
+    if (playerXP >= requiredXP) {
 
-        playerXP -=
-            needed;
+        playerXP -= requiredXP;
 
         playerLevel++;
 
@@ -917,30 +720,21 @@ function checkLevel() {
 function showMessage(text) {
 
     const message =
-        document.getElementById(
-            "message"
-        );
+        document.getElementById("message");
 
 
     message.textContent =
         text;
 
 
-    message.classList.add(
-        "show"
-    );
+    message.classList.add("show");
 
 
-    setTimeout(
-        function() {
+    setTimeout(function() {
 
-            message.classList.remove(
-                "show"
-            );
+        message.classList.remove("show");
 
-        },
-        2500
-    );
+    }, 2500);
 
 }
 
@@ -959,14 +753,11 @@ function saveGame() {
 
         buildings: buildings,
 
-        castleLevel:
-            castleLevel,
+        castleLevel: castleLevel,
 
-        playerLevel:
-            playerLevel,
+        playerLevel: playerLevel,
 
-        playerXP:
-            playerXP
+        playerXP: playerXP
 
     };
 
@@ -993,6 +784,12 @@ function loadGame() {
 
     if (!save) {
 
+        updatePlayer();
+        updateResources();
+        updateXP();
+
+        setupResources();
+
         return;
 
     }
@@ -1001,92 +798,59 @@ function loadGame() {
     try {
 
         const data =
-            JSON.parse(
-                save
-            );
+            JSON.parse(save);
 
 
         player =
-            data.player ||
-            player;
+            data.player || player;
 
 
         resources =
-            data.resources ||
-            resources;
+            data.resources || resources;
 
 
         buildings =
-            data.buildings ||
-            [];
+            data.buildings || [];
 
 
         castleLevel =
-            data.castleLevel ||
-            1;
+            data.castleLevel || 1;
 
 
         playerLevel =
-            data.playerLevel ||
-            1;
+            data.playerLevel || 1;
 
 
         playerXP =
-            data.playerXP ||
-            0;
+            data.playerXP || 0;
 
-
-        // Recréer bâtiments
 
         buildings.forEach(
             function(data) {
 
                 const building =
-                    document.createElement(
-                        "div"
-                    );
+                    document.createElement("div");
 
 
                 building.className =
                     "built-building";
 
 
-                if (
-                    data.type ===
-                    "house"
-                ) {
-
-                    building.textContent =
-                        "🏠";
-
+                if (data.type === "house") {
+                    building.textContent = "🏠";
                 }
 
-
-                if (
-                    data.type ===
-                    "farm"
-                ) {
-
-                    building.textContent =
-                        "🌾";
-
+                if (data.type === "farm") {
+                    building.textContent = "🌾";
                 }
 
-
-                if (
-                    data.type ===
-                    "mine"
-                ) {
-
-                    building.textContent =
-                        "⛏️";
-
+                if (data.type === "mine") {
+                    building.textContent = "⛏️";
                 }
 
 
                 building.style.left =
                     data.x;
-
 
                 building.style.top =
                     data.y;
@@ -1101,12 +865,16 @@ function loadGame() {
 
 
         document
-            .getElementById(
-                "castleLevel"
-            )
+            .getElementById("castleLevel")
             .textContent =
             castleLevel;
 
+
+        updatePlayer();
+        updateResources();
+        updateXP();
+
+        setupResources();
 
     }
     catch (error) {
@@ -1116,21 +884,30 @@ function loadGame() {
             error
         );
 
+        updatePlayer();
+        updateResources();
+        updateXP();
+        setupResources();
+
     }
 
 }
 
 
 // =========================
-// SAUVEGARDE AUTOMATIQUE
+// AUTO-SAVE
 // =========================
 
-setInterval(
-    function() {
+setInterval(function() {
 
-        saveGame();
+    saveGame();
 
-    },
-    10000
-);
+}, 10000);
+
+
+// =========================
+// DÉMARRAGE
+// =========================
+
+loadGame();
 ```
