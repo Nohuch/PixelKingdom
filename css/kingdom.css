@@ -412,3 +412,38 @@ body {
 .panel.open {
     pointer-events: auto;
 }
+
+```css
+/* =========================
+   CORRECTION DES CLICS
+========================= */
+
+.controls {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: auto;
+}
+
+.controls button {
+    position: relative;
+    z-index: 10000;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+#world {
+    z-index: 1;
+}
+
+.topbar {
+    z-index: 5000;
+}
+
+.panel {
+    z-index: 10000;
+}
+
+.panel.open {
+    pointer-events: auto;
+}
+```
