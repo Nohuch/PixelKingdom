@@ -1,0 +1,202 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    background: #182818;
+    font-family: Arial, sans-serif;
+}
+
+.game {
+    width: 100vw;
+    height: 100vh;
+}
+
+/* BARRE DU HAUT */
+
+.topbar {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 25px;
+
+    background: #21170f;
+    border-bottom: 4px solid #8b5a2b;
+
+    color: white;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.resources {
+    display: flex;
+    gap: 25px;
+    font-size: 18px;
+}
+
+/* MONDE */
+
+#world {
+    position: absolute;
+
+    top: 70px;
+    left: 0;
+
+    width: 100vw;
+    height: calc(100vh - 140px);
+
+    overflow: hidden;
+
+    background: #4f9b43;
+}
+
+.grass {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(circle at 20% 30%, #5aa84d 0 3px, transparent 4px),
+        radial-gradient(circle at 70% 60%, #3f8438 0 3px, transparent 4px),
+        radial-gradient(circle at 40% 80%, #65ae55 0 3px, transparent 4px);
+
+    background-size: 45px 45px;
+}
+
+/* OBJETS */
+
+.tree,
+.rock,
+.castle {
+    position: absolute;
+
+    font-size: 55px;
+
+    user-select: none;
+
+    filter: drop-shadow(3px 5px 2px rgba(0,0,0,.35));
+}
+
+.tree {
+    cursor: pointer;
+}
+
+.rock {
+    font-size: 45px;
+}
+
+/* CHÂTEAU */
+
+.castle {
+    font-size: 100px;
+}
+
+/* JOUEUR */
+
+#player {
+    position: absolute;
+
+    z-index: 50;
+
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 45px;
+
+    transition: left .05s linear, top .05s linear;
+
+    filter: drop-shadow(3px 5px 2px rgba(0,0,0,.4));
+}
+
+/* BOUTONS */
+
+.controls {
+    position: fixed;
+    z-index: 100;
+
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 70px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 15px;
+
+    background: #21170f;
+    border-top: 4px solid #8b5a2b;
+}
+
+.controls button {
+    padding: 12px 20px;
+
+    border: 2px solid #b87932;
+    border-radius: 8px;
+
+    background: #5b3519;
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.controls button:hover {
+    transform: translateY(-3px);
+    background: #75471f;
+}
+
+/* MESSAGE */
+
+#message {
+    position: fixed;
+    z-index: 200;
+
+    left: 50%;
+    top: 90px;
+
+    transform: translateX(-50%) translateY(-20px);
+
+    padding: 15px 25px;
+
+    border-radius: 10px;
+
+    background: #21170f;
+    border: 2px solid #d49a45;
+
+    color: white;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: .3s;
+}
+
+#message.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
