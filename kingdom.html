@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Pixel Kingdom - Royaume</title>
 
     <link rel="stylesheet" href="css/style.css">
@@ -11,78 +12,164 @@
 
 <body>
 
-    <div class="game">
+<div class="game">
 
-        <!-- BARRE DU HAUT -->
-        <header class="topbar">
+    <!-- BARRE DU HAUT -->
+    <header class="topbar">
 
-            <div class="logo">👑 PIXEL KINGDOM</div>
+        <div class="logo">
+            👑 PIXEL KINGDOM
+        </div>
 
-            <div class="resources">
-                <span>🪙 <b id="gold">500</b></span>
-                <span>🌲 <b id="wood">250</b></span>
-                <span>🪨 <b id="stone">150</b></span>
-                <span>🌾 <b id="food">300</b></span>
-                <span>💎 <b id="gems">5</b></span>
+        <div class="resources">
+
+            <span>🪙 <b id="gold">500</b></span>
+
+            <span>🌲 <b id="wood">250</b></span>
+
+            <span>🪨 <b id="stone">150</b></span>
+
+            <span>🌾 <b id="food">300</b></span>
+
+            <span>💎 <b id="gems">5</b></span>
+
+        </div>
+
+    </header>
+
+
+    <!-- CARTE -->
+
+    <main id="world">
+
+        <div class="grass"></div>
+
+
+        <!-- ARBRES -->
+
+        <div class="resource tree"
+             data-type="wood"
+             style="left:150px;top:120px;">
+            🌳
+        </div>
+
+        <div class="resource tree"
+             data-type="wood"
+             style="left:700px;top:180px;">
+            🌳
+        </div>
+
+        <div class="resource tree"
+             data-type="wood"
+             style="left:1000px;top:400px;">
+            🌳
+        </div>
+
+        <div class="resource tree"
+             data-type="wood"
+             style="left:300px;top:500px;">
+            🌳
+        </div>
+
+
+        <!-- ROCHERS -->
+
+        <div class="resource rock"
+             data-type="stone"
+             style="left:500px;top:150px;">
+            🪨
+        </div>
+
+        <div class="resource rock"
+             data-type="stone"
+             style="left:850px;top:520px;">
+            🪨
+        </div>
+
+
+        <!-- CHÂTEAU -->
+
+        <div id="castle"
+             class="castle"
+             style="left:600px;top:300px;">
+
+            🏰
+
+            <div class="building-level">
+                Niveau <span id="castleLevel">1</span>
             </div>
-
-        </header>
-
-
-        <!-- CARTE -->
-        <main id="world">
-
-            <div class="grass"></div>
-
-            <!-- Décor -->
-            <div class="tree" style="left: 150px; top: 120px;">🌳</div>
-            <div class="tree" style="left: 700px; top: 180px;">🌳</div>
-            <div class="tree" style="left: 1000px; top: 400px;">🌳</div>
-            <div class="tree" style="left: 300px; top: 500px;">🌳</div>
-
-            <div class="rock" style="left: 500px; top: 150px;">🪨</div>
-            <div class="rock" style="left: 850px; top: 520px;">🪨</div>
-
-            <!-- Château -->
-            <div class="castle" style="left: 600px; top: 300px;">
-                🏰
-            </div>
-
-            <!-- Joueur -->
-            <div id="player">
-                🧙
-            </div>
-
-        </main>
-
-
-        <!-- BARRE DU BAS -->
-        <div class="controls">
-
-            <button onclick="showMessage('🏰 Construction bientôt disponible !')">
-                🏗️ Construire
-            </button>
-
-            <button onclick="showMessage('⚔️ Armée bientôt disponible !')">
-                ⚔️ Armée
-            </button>
-
-            <button onclick="showMessage('🛒 Boutique bientôt disponible !')">
-                🛒 Boutique
-            </button>
-
-            <button onclick="saveGame()">
-                💾 Sauvegarder
-            </button>
 
         </div>
 
 
-        <div id="message"></div>
+        <!-- JOUEUR -->
+
+        <div id="player">
+            🧙
+        </div>
+
+    </main>
+
+
+    <!-- MENU -->
+
+    <div class="controls">
+
+        <button onclick="openBuildMenu()">
+            🏗️ Construire
+        </button>
+
+        <button onclick="upgradeCastle()">
+            🏰 Améliorer château
+        </button>
+
+        <button onclick="saveGame()">
+            💾 Sauvegarder
+        </button>
 
     </div>
 
-    <script src="js/main.js"></script>
+
+    <!-- MENU CONSTRUCTION -->
+
+    <div id="buildMenu" class="panel">
+
+        <h2>🏗️ Construction</h2>
+
+        <p>Choisis un bâtiment :</p>
+
+
+        <button onclick="build('house')">
+            🏠 Maison
+            <small>100 🪙 + 50 🌲</small>
+        </button>
+
+
+        <button onclick="build('farm')">
+            🌾 Ferme
+            <small>150 🪙 + 80 🌲</small>
+        </button>
+
+
+        <button onclick="build('mine')">
+            ⛏️ Mine
+            <small>200 🪙 + 100 🪨</small>
+        </button>
+
+
+        <button onclick="closeBuildMenu()">
+            ❌ Fermer
+        </button>
+
+    </div>
+
+
+    <div id="message"></div>
+
+</div>
+
+
+<script src="js/main.js"></script>
 
 </body>
 </html>
