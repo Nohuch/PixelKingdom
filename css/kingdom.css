@@ -1,205 +1,267 @@
+```css
 * {
     box-sizing: border-box;
 }
 
+
 body {
+
     margin: 0;
+
     overflow: hidden;
+
     background: #182818;
+
     font-family: Arial, sans-serif;
+
 }
+
 
 .game {
+
     width: 100vw;
+
     height: 100vh;
+
 }
 
-/* BARRE DU HAUT */
+
+/* =========================
+   BARRE DU HAUT
+========================= */
 
 .topbar {
+
     position: fixed;
-    z-index: 100;
+
+    z-index: 5000;
+
     top: 0;
+
     left: 0;
 
     width: 100%;
+
     height: 70px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
     padding: 0 25px;
 
     background: #21170f;
+
     border-bottom: 4px solid #8b5a2b;
 
     color: white;
+
 }
+
 
 .logo {
+
     font-size: 24px;
+
     font-weight: bold;
+
 }
+
 
 .resources {
+
     display: flex;
-    gap: 25px;
-    font-size: 18px;
+
+    gap: 18px;
+
+    font-size: 16px;
+
 }
 
-/* MONDE */
+
+/* =========================
+   MONDE
+========================= */
 
 #world {
+
     position: absolute;
 
+    z-index: 1;
+
     top: 70px;
+
     left: 0;
 
     width: 100vw;
+
     height: calc(100vh - 140px);
 
     overflow: hidden;
 
     background: #4f9b43;
+
 }
 
+
 .grass {
+
     position: absolute;
 
     inset: 0;
 
     background:
-        radial-gradient(circle at 20% 30%, #5aa84d 0 3px, transparent 4px),
-        radial-gradient(circle at 70% 60%, #3f8438 0 3px, transparent 4px),
-        radial-gradient(circle at 40% 80%, #65ae55 0 3px, transparent 4px);
+
+        radial-gradient(
+            circle at 20% 30%,
+            #5aa84d 0 3px,
+            transparent 4px
+        ),
+
+        radial-gradient(
+            circle at 70% 60%,
+            #3f8438 0 3px,
+            transparent 4px
+        ),
+
+        radial-gradient(
+            circle at 40% 80%,
+            #65ae55 0 3px,
+            transparent 4px
+        );
 
     background-size: 45px 45px;
+
 }
 
-/* OBJETS */
 
-.tree,
-.rock,
-.castle {
+/* =========================
+   RESSOURCES
+========================= */
+
+.resource {
+
     position: absolute;
 
-    font-size: 55px;
+    z-index: 20;
 
     user-select: none;
 
-    filter: drop-shadow(3px 5px 2px rgba(0,0,0,.35));
+    filter:
+        drop-shadow(
+            3px 5px 2px
+            rgba(0,0,0,.35)
+        );
+
+    transition: .2s;
+
 }
+
 
 .tree {
+
+    font-size: 55px;
+
     cursor: pointer;
+
 }
+
 
 .rock {
+
     font-size: 45px;
+
+    cursor: pointer;
+
 }
 
-/* CHÂTEAU */
 
-.castle {
-    font-size: 100px;
+.resource:hover {
+
+    transform: scale(1.15);
+
 }
 
-/* JOUEUR */
 
-#player {
+/* =========================
+   CHÂTEAU
+========================= */
+
+#castle {
+
     position: absolute;
 
-    z-index: 50;
+    z-index: 20;
+
+    font-size: 100px;
+
+    text-align: center;
+
+    filter:
+        drop-shadow(
+            3px 5px 2px
+            rgba(0,0,0,.4)
+        );
+
+}
+
+
+.building-level {
+
+    font-size: 14px;
+
+    background: #21170f;
+
+    color: white;
+
+    border: 2px solid #d49a45;
+
+    border-radius: 6px;
+
+    padding: 4px 8px;
+
+    margin-top: -5px;
+
+}
+
+
+/* =========================
+   JOUEUR
+========================= */
+
+#player {
+
+    position: absolute;
+
+    z-index: 100;
 
     width: 55px;
+
     height: 55px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     font-size: 45px;
 
-    transition: left .05s linear, top .05s linear;
+    transition:
+        left .05s linear,
+        top .05s linear;
 
-    filter: drop-shadow(3px 5px 2px rgba(0,0,0,.4));
+    filter:
+        drop-shadow(
+            3px 5px 2px
+            rgba(0,0,0,.4)
+        );
+
 }
 
-/* BOUTONS */
 
-.controls {
-    position: fixed;
-    z-index: 100;
-
-    bottom: 0;
-    left: 0;
-
-    width: 100%;
-    height: 70px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    gap: 15px;
-
-    background: #21170f;
-    border-top: 4px solid #8b5a2b;
-}
-
-.controls button {
-    padding: 12px 20px;
-
-    border: 2px solid #b87932;
-    border-radius: 8px;
-
-    background: #5b3519;
-    color: white;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition: .2s;
-}
-
-.controls button:hover {
-    transform: translateY(-3px);
-    background: #75471f;
-}
-
-/* MESSAGE */
-
-#message {
-    position: fixed;
-    z-index: 200;
-
-    left: 50%;
-    top: 90px;
-
-    transform: translateX(-50%) translateY(-20px);
-
-    padding: 15px 25px;
-
-    border-radius: 10px;
-
-    background: #21170f;
-    border: 2px solid #d49a45;
-
-    color: white;
-
-    opacity: 0;
-
-    pointer-events: none;
-
-    transition: .3s;
-}
-
-#message.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-}
 /* =========================
    BÂTIMENTS
 ========================= */
@@ -208,11 +270,9 @@ body {
 
     position: absolute;
 
-    z-index: 20;
+    z-index: 30;
 
     font-size: 60px;
-
-    cursor: pointer;
 
     filter:
         drop-shadow(
@@ -248,35 +308,177 @@ body {
 
 
 /* =========================
-   NIVEAU CHÂTEAU
+   ENNEMIS
 ========================= */
 
-#castle {
+.enemy {
 
     position: absolute;
 
-    z-index: 20;
+    z-index: 40;
 
-    text-align: center;
+    font-size: 60px;
+
+    cursor: pointer;
+
+    user-select: none;
+
+    transition:
+        transform .15s;
+
+    filter:
+        drop-shadow(
+            3px 5px 2px
+            rgba(0,0,0,.5)
+        );
 
 }
 
 
-.building-level {
+.enemy:hover {
 
-    font-size: 14px;
+    transform: scale(1.1);
+
+}
+
+
+/* BARRE DE VIE */
+
+.enemy-health {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: -10px;
+
+    transform:
+        translateX(-50%);
+
+    width: 70px;
+
+    height: 8px;
+
+    background: #351010;
+
+    border: 1px solid #111;
+
+    border-radius: 5px;
+
+    overflow: hidden;
+
+}
+
+
+.enemy-health-bar {
+
+    width: 100%;
+
+    height: 100%;
+
+    background: #e53935;
+
+    transition: width .2s;
+
+}
+
+
+/* DÉGÂTS */
+
+.enemy.hit {
+
+    animation:
+        enemyHit .2s;
+
+}
+
+
+@keyframes enemyHit {
+
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-8px);
+    }
+
+    50% {
+        transform: translateX(8px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+
+}
+
+
+/* =========================
+   BARRE DU BAS
+========================= */
+
+.controls {
+
+    position: fixed;
+
+    z-index: 9999;
+
+    bottom: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 70px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 15px;
 
     background: #21170f;
 
+    border-top: 4px solid #8b5a2b;
+
+}
+
+
+.controls button {
+
+    position: relative;
+
+    z-index: 10000;
+
+    padding: 12px 20px;
+
+    border: 2px solid #b87932;
+
+    border-radius: 8px;
+
+    background: #5b3519;
+
     color: white;
 
-    border: 2px solid #d49a45;
+    font-weight: bold;
 
-    border-radius: 6px;
+    cursor: pointer;
 
-    padding: 4px 8px;
+}
 
-    margin-top: -5px;
+
+.controls button:hover {
+
+    transform: translateY(-3px);
+
+    background: #75471f;
 
 }
 
@@ -289,7 +491,7 @@ body {
 
     position: fixed;
 
-    z-index: 300;
+    z-index: 10000;
 
     top: 50%;
 
@@ -339,22 +541,6 @@ body {
 }
 
 
-.panel h2 {
-
-    margin-bottom: 15px;
-
-}
-
-
-.panel p {
-
-    font-size: 16px;
-
-    margin-bottom: 20px;
-
-}
-
-
 .panel button {
 
     width: 100%;
@@ -392,58 +578,83 @@ body {
     opacity: .7;
 
 }
-/* BOUTONS TOUJOURS CLIQUABLES */
 
-.controls {
-    z-index: 500;
-}
 
-.controls button {
-    position: relative;
-    z-index: 501;
-    pointer-events: auto;
-}
-
-.panel {
-    z-index: 1000;
-    pointer-events: none;
-}
-
-.panel.open {
-    pointer-events: auto;
-}
-
-```css
 /* =========================
-   CORRECTION DES CLICS
+   MESSAGE
 ========================= */
 
-.controls {
+#message {
+
     position: fixed;
-    z-index: 9999;
-    pointer-events: auto;
+
+    z-index: 11000;
+
+    left: 50%;
+
+    top: 90px;
+
+    transform:
+        translateX(-50%)
+        translateY(-20px);
+
+    padding: 15px 25px;
+
+    border-radius: 10px;
+
+    background: #21170f;
+
+    border: 2px solid #d49a45;
+
+    color: white;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: .3s;
+
 }
 
-.controls button {
-    position: relative;
-    z-index: 10000;
-    pointer-events: auto;
-    cursor: pointer;
+
+#message.show {
+
+    opacity: 1;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+
 }
 
-#world {
-    z-index: 1;
-}
 
-.topbar {
-    z-index: 5000;
-}
+/* =========================
+   AIDE COMBAT
+========================= */
 
-.panel {
-    z-index: 10000;
-}
+#combatHelp {
 
-.panel.open {
-    pointer-events: auto;
+    position: fixed;
+
+    z-index: 4000;
+
+    right: 15px;
+
+    bottom: 85px;
+
+    padding: 12px 16px;
+
+    background: #21170f;
+
+    border: 2px solid #b87932;
+
+    border-radius: 10px;
+
+    color: white;
+
+    text-align: center;
+
+    font-size: 14px;
+
 }
 ```
