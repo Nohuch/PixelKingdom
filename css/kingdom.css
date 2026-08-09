@@ -32,8 +32,6 @@ body {
     width: 100%;
     height: 70px;
 
-    z-index: 1000;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -44,6 +42,8 @@ body {
     border-bottom: 4px solid #8b5a2b;
 
     color: white;
+
+    z-index: 100;
 }
 
 .logo {
@@ -54,14 +54,12 @@ body {
 .resources {
     display: flex;
     gap: 18px;
-    align-items: center;
-
     font-size: 16px;
 }
 
 
 /* =========================
-   MONDE
+   CARTE
 ========================= */
 
 #world {
@@ -76,16 +74,21 @@ body {
     overflow: hidden;
 
     background: #4f9b43;
+
+    z-index: 1;
 }
+
+
+/* HERBE */
 
 .grass {
     position: absolute;
 
-    inset: 0;
+    top: 0;
+    left: 0;
 
-    z-index: 1;
-
-    pointer-events: none;
+    width: 100%;
+    height: 100%;
 
     background:
         radial-gradient(circle at 20% 30%, #5aa84d 0 3px, transparent 4px),
@@ -93,11 +96,15 @@ body {
         radial-gradient(circle at 40% 80%, #65ae55 0 3px, transparent 4px);
 
     background-size: 45px 45px;
+
+    z-index: 1;
+
+    pointer-events: none;
 }
 
 
 /* =========================
-   RESSOURCES
+   ARBRES / ROCHERS
 ========================= */
 
 .resource {
@@ -106,12 +113,10 @@ body {
     z-index: 20;
 
     cursor: pointer;
+
     user-select: none;
 
-    transition: transform .2s;
-
-    filter:
-        drop-shadow(3px 5px 2px rgba(0,0,0,.35));
+    filter: drop-shadow(3px 5px 2px rgba(0,0,0,.35));
 }
 
 .tree {
@@ -134,7 +139,7 @@ body {
 #castle {
     position: absolute;
 
-    z-index: 50;
+    z-index: 30;
 
     font-size: 100px;
 
@@ -144,8 +149,7 @@ body {
 
     user-select: none;
 
-    filter:
-        drop-shadow(3px 5px 2px rgba(0,0,0,.45));
+    filter: drop-shadow(3px 5px 2px rgba(0,0,0,.4));
 }
 
 .building-level {
@@ -157,13 +161,15 @@ body {
 
     background: #21170f;
 
+    color: white;
+
     border: 2px solid #d49a45;
 
     border-radius: 6px;
 
-    color: white;
-
     font-size: 14px;
+
+    line-height: 1;
 }
 
 
@@ -174,7 +180,7 @@ body {
 #player {
     position: absolute;
 
-    z-index: 100;
+    z-index: 50;
 
     width: 55px;
     height: 55px;
@@ -190,44 +196,7 @@ body {
 
     pointer-events: none;
 
-    filter:
-        drop-shadow(3px 5px 2px rgba(0,0,0,.45));
-}
-
-
-/* =========================
-   BÂTIMENTS CONSTRUITS
-========================= */
-
-.built-building {
-    position: absolute;
-
-    z-index: 30;
-
-    font-size: 60px;
-
-    line-height: 1;
-
-    user-select: none;
-    pointer-events: none;
-
-    filter:
-        drop-shadow(3px 5px 2px rgba(0,0,0,.4));
-
-    animation: buildingAppear .4s ease;
-}
-
-@keyframes buildingAppear {
-
-    from {
-        transform: scale(0);
-        opacity: 0;
-    }
-
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
+    filter: drop-shadow(3px 5px 2px rgba(0,0,0,.4));
 }
 
 
@@ -238,7 +207,7 @@ body {
 .enemy {
     position: absolute;
 
-    z-index: 40;
+    z-index: 25;
 
     font-size: 60px;
 
@@ -246,17 +215,14 @@ body {
 
     user-select: none;
 
-    filter:
-        drop-shadow(3px 5px 2px rgba(0,0,0,.5));
-
-    transition: transform .15s;
+    filter: drop-shadow(3px 5px 2px rgba(0,0,0,.5));
 }
 
 .enemy-health {
     position: absolute;
 
     left: 50%;
-    top: -12px;
+    top: -10px;
 
     transform: translateX(-50%);
 
@@ -277,40 +243,45 @@ body {
     height: 100%;
 
     background: #e53935;
-
-    transition: width .2s;
 }
 
-.enemy.hit {
-    animation: enemyHit .2s;
+
+/* =========================
+   BÂTIMENTS
+========================= */
+
+.built-building {
+    position: absolute;
+
+    z-index: 25;
+
+    font-size: 60px;
+
+    line-height: 1;
+
+    pointer-events: none;
+
+    filter: drop-shadow(3px 5px 2px rgba(0,0,0,.4));
+
+    animation: buildingAppear .4s ease;
 }
 
-@keyframes enemyHit {
+@keyframes buildingAppear {
 
-    0% {
-        transform: translateX(0);
+    from {
+        transform: scale(0);
+        opacity: 0;
     }
 
-    25% {
-        transform: translateX(-8px);
-    }
-
-    50% {
-        transform: translateX(8px);
-    }
-
-    75% {
-        transform: translateX(-5px);
-    }
-
-    100% {
-        transform: translateX(0);
+    to {
+        transform: scale(1);
+        opacity: 1;
     }
 }
 
 
 /* =========================
-   BARRE DES BOUTONS
+   BOUTONS DU BAS
 ========================= */
 
 .controls {
@@ -322,18 +293,18 @@ body {
     width: 100%;
     height: 70px;
 
-    z-index: 2000;
-
     display: flex;
 
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
     gap: 15px;
 
     background: #21170f;
 
     border-top: 4px solid #8b5a2b;
+
+    z-index: 200;
 }
 
 .controls button {
@@ -349,15 +320,13 @@ body {
 
     font-weight: bold;
 
-    font-size: 15px;
-
     cursor: pointer;
 }
 
 .controls button:hover {
-    transform: translateY(-3px);
-
     background: #75471f;
+
+    transform: translateY(-3px);
 }
 
 
@@ -368,8 +337,6 @@ body {
 .panel {
     position: fixed;
 
-    z-index: 5000;
-
     top: 50%;
     left: 50%;
 
@@ -377,9 +344,7 @@ body {
 
     padding: 25px;
 
-    transform:
-        translate(-50%, -50%)
-        scale(.8);
+    transform: translate(-50%, -50%);
 
     background: #21170f;
 
@@ -397,22 +362,13 @@ body {
 
     transition: .25s;
 
-    box-shadow:
-        0 10px 40px rgba(0,0,0,.7);
+    z-index: 500;
 }
 
 .panel.open {
     opacity: 1;
 
     pointer-events: auto;
-
-    transform:
-        translate(-50%, -50%)
-        scale(1);
-}
-
-.panel h2 {
-    margin-top: 0;
 }
 
 .panel button {
@@ -431,8 +387,6 @@ body {
     color: white;
 
     cursor: pointer;
-
-    font-weight: bold;
 }
 
 .panel button:hover {
@@ -455,22 +409,18 @@ body {
 #message {
     position: fixed;
 
-    z-index: 6000;
-
     left: 50%;
     top: 90px;
 
+    transform: translateX(-50%);
+
     padding: 15px 25px;
-
-    transform:
-        translateX(-50%)
-        translateY(-20px);
-
-    border-radius: 10px;
 
     background: #21170f;
 
     border: 2px solid #d49a45;
+
+    border-radius: 10px;
 
     color: white;
 
@@ -479,14 +429,12 @@ body {
     pointer-events: none;
 
     transition: .3s;
+
+    z-index: 1000;
 }
 
 #message.show {
     opacity: 1;
-
-    transform:
-        translateX(-50%)
-        translateY(0);
 }
 
 
@@ -499,8 +447,6 @@ body {
 
     right: 15px;
     bottom: 85px;
-
-    z-index: 1500;
 
     padding: 12px 16px;
 
@@ -515,5 +461,7 @@ body {
     text-align: center;
 
     font-size: 14px;
+
+    z-index: 150;
 }
 ```
