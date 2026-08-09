@@ -1,46 +1,88 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Kingdom - Royaume</title>
 
-<meta charset="UTF-8">
-
-<title>Mon Royaume</title>
-
-<link rel="stylesheet" href="css/style.css">
-
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/kingdom.css">
 </head>
 
 <body>
 
-<header>
+    <div class="game">
 
-<h1>🏰 Mon Royaume</h1>
+        <!-- BARRE DU HAUT -->
+        <header class="topbar">
 
-<p>Bienvenue Roi !</p>
+            <div class="logo">👑 PIXEL KINGDOM</div>
 
-<h2>💰 Or : <span id="gold">500</span></h2>
+            <div class="resources">
+                <span>🪙 <b id="gold">500</b></span>
+                <span>🌲 <b id="wood">250</b></span>
+                <span>🪨 <b id="stone">150</b></span>
+                <span>🌾 <b id="food">300</b></span>
+                <span>💎 <b id="gems">5</b></span>
+            </div>
 
-<h2>🌲 Bois : <span id="wood">250</span></h2>
+        </header>
 
-<h2>🪨 Pierre : <span id="stone">150</span></h2>
 
-<button onclick="collectGold()">Récolter 100 Or</button>
+        <!-- CARTE -->
+        <main id="world">
 
-</header>
+            <div class="grass"></div>
 
-<script>
+            <!-- Décor -->
+            <div class="tree" style="left: 150px; top: 120px;">🌳</div>
+            <div class="tree" style="left: 700px; top: 180px;">🌳</div>
+            <div class="tree" style="left: 1000px; top: 400px;">🌳</div>
+            <div class="tree" style="left: 300px; top: 500px;">🌳</div>
 
-let gold=500;
+            <div class="rock" style="left: 500px; top: 150px;">🪨</div>
+            <div class="rock" style="left: 850px; top: 520px;">🪨</div>
 
-function collectGold(){
+            <!-- Château -->
+            <div class="castle" style="left: 600px; top: 300px;">
+                🏰
+            </div>
 
-gold+=100;
+            <!-- Joueur -->
+            <div id="player">
+                🧙
+            </div>
 
-document.getElementById("gold").innerHTML=gold;
+        </main>
 
-}
 
-</script>
+        <!-- BARRE DU BAS -->
+        <div class="controls">
+
+            <button onclick="showMessage('🏰 Construction bientôt disponible !')">
+                🏗️ Construire
+            </button>
+
+            <button onclick="showMessage('⚔️ Armée bientôt disponible !')">
+                ⚔️ Armée
+            </button>
+
+            <button onclick="showMessage('🛒 Boutique bientôt disponible !')">
+                🛒 Boutique
+            </button>
+
+            <button onclick="saveGame()">
+                💾 Sauvegarder
+            </button>
+
+        </div>
+
+
+        <div id="message"></div>
+
+    </div>
+
+    <script src="js/main.js"></script>
 
 </body>
 </html>
