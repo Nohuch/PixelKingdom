@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Pixel Kingdom</title>
+    <title>👑 Pixel Kingdom</title>
 
     <link rel="stylesheet" href="css/kingdom.css">
 </head>
@@ -23,15 +23,13 @@
         </div>
 
         <div class="resources">
-
-            <span>🪙 <b id="gold">200</b></span>
-            <span>🌲 <b id="wood">450</b></span>
-            <span>🪨 <b id="stone">40</b></span>
+            <span>🪙 <b id="gold">500</b></span>
+            <span>🌲 <b id="wood">250</b></span>
+            <span>🪨 <b id="stone">150</b></span>
             <span>🌾 <b id="food">300</b></span>
             <span>💎 <b id="gems">5</b></span>
             <span>⭐ <b id="xp">0</b></span>
             <span>🆙 <b id="level">1</b></span>
-
         </div>
 
     </header>
@@ -47,25 +45,37 @@
 
         <div class="resource tree"
              data-type="wood"
-             style="left:150px; top:120px;">
+             style="left:100px; top:100px;">
             🌳
         </div>
 
         <div class="resource tree"
              data-type="wood"
-             style="left:750px; top:150px;">
+             style="left:350px; top:150px;">
             🌳
         </div>
 
         <div class="resource tree"
              data-type="wood"
-             style="left:1000px; top:400px;">
+             style="left:850px; top:120px;">
             🌳
         </div>
 
         <div class="resource tree"
              data-type="wood"
-             style="left:300px; top:500px;">
+             style="left:1100px; top:300px;">
+            🌳
+        </div>
+
+        <div class="resource tree"
+             data-type="wood"
+             style="left:200px; top:430px;">
+            🌳
+        </div>
+
+        <div class="resource tree"
+             data-type="wood"
+             style="left:950px; top:450px;">
             🌳
         </div>
 
@@ -74,23 +84,24 @@
 
         <div class="resource rock"
              data-type="stone"
-             style="left:450px; top:160px;">
+             style="left:450px; top:100px;">
             🪨
         </div>
 
         <div class="resource rock"
              data-type="stone"
-             style="left:850px; top:500px;">
+             style="left:1050px; top:500px;">
             🪨
         </div>
 
 
         <!-- CHÂTEAU -->
 
-        <div id="castle"
-             style="left:600px; top:300px;">
+        <div id="castle">
 
-            🏰
+            <div class="castle-emoji">
+                🏰
+            </div>
 
             <div class="building-level">
                 Niveau <span id="castleLevel">1</span>
@@ -104,7 +115,7 @@
         <div class="enemy"
              data-hp="50"
              data-maxhp="50"
-             style="left:350px; top:220px;">
+             style="left:300px; top:250px;">
 
             👹
 
@@ -118,7 +129,7 @@
         <div class="enemy"
              data-hp="75"
              data-maxhp="75"
-             style="left:900px; top:300px;">
+             style="left:900px; top:250px;">
 
             👺
 
@@ -152,7 +163,7 @@
     </main>
 
 
-    <!-- BOUTONS -->
+    <!-- BARRE DU BAS -->
 
     <div class="controls">
 
@@ -161,7 +172,7 @@
         </button>
 
         <button id="upgradeButton">
-            🏰 Améliorer château
+            🏰 Améliorer le château
         </button>
 
         <button id="saveButton">
@@ -209,8 +220,10 @@
     <!-- AIDE -->
 
     <div id="combatHelp">
+
         ⚔️ Approche-toi d'un monstre<br>
         Appuie sur <b>E</b> pour attaquer
+
     </div>
 
 </div>
