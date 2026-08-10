@@ -7,12 +7,21 @@ html,
 body {
     margin: 0;
     padding: 0;
+
     width: 100%;
     height: 100%;
+
     overflow: hidden;
+
     font-family: Arial, sans-serif;
+
     background: #182818;
 }
+
+
+/* =========================
+   JEU
+========================= */
 
 .game {
     width: 100vw;
@@ -26,6 +35,7 @@ body {
 
 .topbar {
     position: fixed;
+
     top: 0;
     left: 0;
 
@@ -33,17 +43,19 @@ body {
     height: 70px;
 
     display: flex;
+
     align-items: center;
     justify-content: space-between;
 
     padding: 0 25px;
 
     background: #21170f;
+
     border-bottom: 4px solid #8b5a2b;
 
     color: white;
 
-    z-index: 100;
+    z-index: 1000;
 }
 
 .logo {
@@ -53,13 +65,17 @@ body {
 
 .resources {
     display: flex;
+
     gap: 18px;
+
+    align-items: center;
+
     font-size: 16px;
 }
 
 
 /* =========================
-   CARTE
+   MONDE
 ========================= */
 
 #world {
@@ -91,20 +107,34 @@ body {
     height: 100%;
 
     background:
-        radial-gradient(circle at 20% 30%, #5aa84d 0 3px, transparent 4px),
-        radial-gradient(circle at 70% 60%, #3f8438 0 3px, transparent 4px),
-        radial-gradient(circle at 40% 80%, #65ae55 0 3px, transparent 4px);
+        radial-gradient(
+            circle at 20% 30%,
+            #5aa84d 0 3px,
+            transparent 4px
+        ),
+
+        radial-gradient(
+            circle at 70% 60%,
+            #3f8438 0 3px,
+            transparent 4px
+        ),
+
+        radial-gradient(
+            circle at 40% 80%,
+            #65ae55 0 3px,
+            transparent 4px
+        );
 
     background-size: 45px 45px;
 
-    z-index: 1;
-
     pointer-events: none;
+
+    z-index: 1;
 }
 
 
 /* =========================
-   ARBRES / ROCHERS
+   RESSOURCES
 ========================= */
 
 .resource {
@@ -116,7 +146,13 @@ body {
 
     user-select: none;
 
-    filter: drop-shadow(3px 5px 2px rgba(0,0,0,.35));
+    transition: transform .2s;
+
+    filter:
+        drop-shadow(
+            3px 5px 2px
+            rgba(0,0,0,.35)
+        );
 }
 
 .tree {
@@ -139,25 +175,42 @@ body {
 #castle {
     position: absolute;
 
-    z-index: 30;
+    left: 50%;
+    top: 50%;
 
-    font-size: 100px;
+    transform: translate(-50%, -50%);
 
-    line-height: 1;
+    width: 180px;
+    height: 180px;
 
-    text-align: center;
+    z-index: 60;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
 
     user-select: none;
 
-    filter: drop-shadow(3px 5px 2px rgba(0,0,0,.4));
+    filter:
+        drop-shadow(
+            4px 7px 3px
+            rgba(0,0,0,.45)
+        );
+}
+
+.castle-emoji {
+    font-size: 120px;
+
+    line-height: 1;
 }
 
 .building-level {
-    display: block;
-
     margin-top: 5px;
 
-    padding: 4px 8px;
+    padding: 5px 10px;
 
     background: #21170f;
 
@@ -165,11 +218,11 @@ body {
 
     border: 2px solid #d49a45;
 
-    border-radius: 6px;
+    border-radius: 7px;
 
     font-size: 14px;
 
-    line-height: 1;
+    white-space: nowrap;
 }
 
 
@@ -180,7 +233,7 @@ body {
 #player {
     position: absolute;
 
-    z-index: 50;
+    z-index: 80;
 
     width: 55px;
     height: 55px;
@@ -196,7 +249,11 @@ body {
 
     pointer-events: none;
 
-    filter: drop-shadow(3px 5px 2px rgba(0,0,0,.4));
+    filter:
+        drop-shadow(
+            3px 5px 2px
+            rgba(0,0,0,.4)
+        );
 }
 
 
@@ -207,7 +264,7 @@ body {
 .enemy {
     position: absolute;
 
-    z-index: 25;
+    z-index: 40;
 
     font-size: 60px;
 
@@ -215,7 +272,11 @@ body {
 
     user-select: none;
 
-    filter: drop-shadow(3px 5px 2px rgba(0,0,0,.5));
+    filter:
+        drop-shadow(
+            3px 5px 2px
+            rgba(0,0,0,.5)
+        );
 }
 
 .enemy-health {
@@ -243,6 +304,8 @@ body {
     height: 100%;
 
     background: #e53935;
+
+    transition: width .2s;
 }
 
 
@@ -253,7 +316,7 @@ body {
 .built-building {
     position: absolute;
 
-    z-index: 25;
+    z-index: 35;
 
     font-size: 60px;
 
@@ -261,9 +324,14 @@ body {
 
     pointer-events: none;
 
-    filter: drop-shadow(3px 5px 2px rgba(0,0,0,.4));
+    filter:
+        drop-shadow(
+            3px 5px 2px
+            rgba(0,0,0,.4)
+        );
 
-    animation: buildingAppear .4s ease;
+    animation:
+        buildingAppear .4s ease;
 }
 
 @keyframes buildingAppear {
@@ -281,14 +349,14 @@ body {
 
 
 /* =========================
-   BOUTONS DU BAS
+   BARRE DU BAS
 ========================= */
 
 .controls {
     position: fixed;
 
-    left: 0;
     bottom: 0;
+    left: 0;
 
     width: 100%;
     height: 70px;
@@ -304,23 +372,25 @@ body {
 
     border-top: 4px solid #8b5a2b;
 
-    z-index: 200;
+    z-index: 1000;
 }
 
 .controls button {
     padding: 12px 20px;
 
-    border: 2px solid #b87932;
-
-    border-radius: 8px;
-
     background: #5b3519;
 
     color: white;
 
+    border: 2px solid #b87932;
+
+    border-radius: 8px;
+
     font-weight: bold;
 
     cursor: pointer;
+
+    transition: .2s;
 }
 
 .controls button:hover {
@@ -337,6 +407,8 @@ body {
 .panel {
     position: fixed;
 
+    z-index: 3000;
+
     top: 50%;
     left: 50%;
 
@@ -344,7 +416,9 @@ body {
 
     padding: 25px;
 
-    transform: translate(-50%, -50%);
+    transform:
+        translate(-50%, -50%)
+        scale(.8);
 
     background: #21170f;
 
@@ -362,13 +436,23 @@ body {
 
     transition: .25s;
 
-    z-index: 500;
+    box-shadow:
+        0 10px 40px
+        rgba(0,0,0,.7);
 }
 
 .panel.open {
     opacity: 1;
 
     pointer-events: auto;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1);
+}
+
+.panel h2 {
+    margin-top: 0;
 }
 
 .panel button {
@@ -378,13 +462,13 @@ body {
 
     padding: 12px;
 
-    border: 2px solid #9b642c;
-
-    border-radius: 8px;
-
     background: #5b3519;
 
     color: white;
+
+    border: 2px solid #9b642c;
+
+    border-radius: 8px;
 
     cursor: pointer;
 }
@@ -409,10 +493,14 @@ body {
 #message {
     position: fixed;
 
-    left: 50%;
-    top: 90px;
+    z-index: 5000;
 
-    transform: translateX(-50%);
+    top: 90px;
+    left: 50%;
+
+    transform:
+        translateX(-50%)
+        translateY(-20px);
 
     padding: 15px 25px;
 
@@ -429,12 +517,14 @@ body {
     pointer-events: none;
 
     transition: .3s;
-
-    z-index: 1000;
 }
 
 #message.show {
     opacity: 1;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
 }
 
 
@@ -447,6 +537,8 @@ body {
 
     right: 15px;
     bottom: 85px;
+
+    z-index: 1500;
 
     padding: 12px 16px;
 
@@ -461,7 +553,5 @@ body {
     text-align: center;
 
     font-size: 14px;
-
-    z-index: 150;
 }
 ```
